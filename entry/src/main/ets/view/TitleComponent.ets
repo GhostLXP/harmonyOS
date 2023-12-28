@@ -2,6 +2,7 @@
  * 标题组件
  * @Link修饰器管理TitleComponent组件内的状态变量isRefreshData，状态变量isRefreshData值发生改变后，通过@Link装饰器通知父容器页面刷新。
  */
+import router from '@ohos.router';
 import { FontSize, TitleBarStyle, WEIGHT } from '../common/Constants';
 @Component
 export struct TitleComponent {
@@ -17,7 +18,7 @@ export struct TitleComponent {
             .width(TitleBarStyle.IMAGE_BACK_SIZE)
             .margin({ right: TitleBarStyle.IMAGE_BACK_MARGIN_RIGHT })
             .onClick(() => {
-              //todo 点击事件
+              router.back()
             })
         }
         //todo 标题居左、居中

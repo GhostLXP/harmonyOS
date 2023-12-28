@@ -1,12 +1,14 @@
 /**
  * 首页Item组件
  */
+import router from '@ohos.router';
 import { FontSize, ItemStyle, WEIGHT, FontWeight } from '../common/Constants';
 
 @Component
 export struct IndexListItemComponent {
   index?: number;
   private name?: string;
+  private pathUrl: string = ''
 
   build() {
     Row() {
@@ -36,7 +38,9 @@ export struct IndexListItemComponent {
     .height(ItemStyle.BAR_HEIGHT)
     .width(WEIGHT)
     .onClick(() => {
-
+      router.pushUrl({
+        url: this.pathUrl
+      })
     })
   }
 

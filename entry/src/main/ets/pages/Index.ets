@@ -34,7 +34,7 @@ struct IndexPage {
       List() {
         ForEach(this.dataSource, (item: IndexData, index?: number) => {
             ListItem() {
-              IndexListItemComponent({ index: (Number(index) + 1), name: item.name })
+              IndexListItemComponent({ index: (Number(index) + 1), name: item.name, pathUrl: item.pathUrl })
             }
           }, (item: IndexData) => JSON.stringify(item))
       }
