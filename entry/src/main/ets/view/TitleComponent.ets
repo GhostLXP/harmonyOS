@@ -8,6 +8,7 @@ import { FontSize, TitleBarStyle, WEIGHT } from '../common/Constants';
 export struct TitleComponent {
   @State title: string = '';
   @State showBackView: boolean = false
+  @State showRefreshView: boolean = false
   @Link isRefresh: boolean;
   build() {
     Row() {
@@ -29,12 +30,14 @@ export struct TitleComponent {
       .justifyContent(FlexAlign.Start)
 
       Row() {
-        Image($r('app.media.loading'))
-          .height(TitleBarStyle.IMAGE_LOADING_SIZE)
-          .width(TitleBarStyle.IMAGE_LOADING_SIZE)
-          .onClick(() => {
-            this.isRefresh = !this.isRefresh;
-          })
+        if (this.showRefreshView) {
+          Image($r('app.media.loading'))
+            .height(TitleBarStyle.IMAGE_LOADING_SIZE)
+            .width(TitleBarStyle.IMAGE_LOADING_SIZE)
+            .onClick(() => {
+              this.isRefresh = !this.isRefresh;
+            })
+        }
       }
       .width(TitleBarStyle.WEIGHT)
       .height(WEIGHT)

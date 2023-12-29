@@ -1,14 +1,14 @@
 /**
- * 首页Item组件
+ * 排行榜Item组件
  */
-import router from '@ohos.router';
 import { FontSize, ItemStyle, WEIGHT, FontWeight } from '../common/Constants';
 
 @Component
-export struct IndexListItemComponent {
+export struct RankListItemComponent {
   index?: number;
   private name?: string;
-  private pathUrl: string = ''
+  private vote?: string;
+  @Prop changeColor: boolean;
 
   build() {
     Row() {
@@ -33,20 +33,24 @@ export struct IndexListItemComponent {
         .width(ItemStyle.LAYOUT_WEIGHT_CENTER)
         .fontWeight(FontWeight.BOLDER)
         .fontSize(FontSize.MIDDLE)
-        .fontColor(ItemStyle.COLOR_BLACK)
+        .fontColor(this.changeColor? ItemStyle.COLOR_BLACK: ItemStyle.COLOR_BLUE)
+
+      Text(this.vote)
+        .width(ItemStyle.LAYOUT_WEIGHT_RIGHT)
+        .fontWeight(FontWeight.BOLD)
+        .fontSize(FontSize.SMALL)
+        .fontColor(this.changeColor? ItemStyle.COLOR_BLACK: ItemStyle.COLOR_BLUE)
     }
     .height(ItemStyle.BAR_HEIGHT)
     .width(WEIGHT)
     .onClick(() => {
-      router.pushUrl({
-        url: this.pathUrl
-      })
+
     })
   }
 
   @Builder CircleText(index: number) {
     Row() {
-      Text(index?.toString())
+      Text(index.toString())
         .fontWeight(FontWeight.BOLD)
         .fontSize(FontSize.SMALL)
         .fontColor(Color.White);
@@ -59,6 +63,7 @@ export struct IndexListItemComponent {
   }
 
   isRenderCircleText(): boolean {
-    return true
+    // Just render the element before the fourth in the list.
+    return this.index === 1 || this.index === 2 || this.index === 3;
   }
 }
