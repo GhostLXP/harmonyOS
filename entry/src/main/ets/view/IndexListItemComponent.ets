@@ -39,7 +39,10 @@ export struct IndexListItemComponent {
     .width(WEIGHT)
     .onClick(() => {
       router.pushUrl({
-        url: this.pathUrl
+        url: this.pathUrl,
+        params: {
+          src: this.name
+        }
       })
     })
   }

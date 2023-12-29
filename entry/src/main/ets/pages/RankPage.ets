@@ -4,6 +4,7 @@
  *@Link装饰的变量可以和父组件的@State变量建立双向数据绑定，需要注意的是：@Link变量不能在组件内部进行初始化。
  *@Builder装饰的方法用于定义组件的声明式UI描述，在一个自定义组件内快速生成多个布局内容。
  */
+import router from '@ohos.router';
 import { Style, WEIGHT } from '../common/Constants'
 import { RankListHeaderComponent } from '../view/RankListHeaderComponent';
 import { RankListItemComponent } from '../view/RankListItemComponent';
@@ -16,7 +17,8 @@ let rankModel: RankViewModel = new RankViewModel();
 @Entry
 @Component
 struct RankPage {
-  title: string = '排行榜'
+  //JavaScript的逻辑或运算符||。如果router.getParams()?.['src']的值是undefined，null，NaN，0，""（空字符串）或false，那么title的值将会是你指定的默认值。
+  @State title: string = router.getParams()?.['src'] || '排行榜'
   @State isRefreshPage: boolean = false
   @State dataSource1: RankData[] = [];
   @State dataSource2: RankData[] = [];
@@ -28,7 +30,7 @@ struct RankPage {
 
   build() {
     Column() {
-      TitleComponent({title:this.title, showBackView: true, isRefresh: $isRefreshPage, showRefreshView: true})
+      TitleComponent({title:this.title.toString(), showBackView: true, isRefresh: $isRefreshPage, showRefreshView: true})
       RankListHeaderComponent({
         paddingValue: {
           left: Style.RANK_PADDING,
